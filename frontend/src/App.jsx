@@ -8,26 +8,44 @@ import CompletedTasks from "./pages/CompletedTasks";
 import PendingTasks from "./pages/PendingTasks";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
+import TaskAdd from "./components/TaskAdd";
+import TaskSearch from "./pages/TaskSearch";
+import TaskViewLayout from "./layout/TaskViewLayout";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
       {
-        index: true,
-        element: <TaskList />,
+        path: "/",
+        element: <TaskViewLayout />,
+        children: [
+          {
+            index: true,
+            element: <TaskList />,
+          },
+          {
+            path: "task/:taskId",
+            element: <TaskDetail />,
+          },
+          {
+            path: "completed",
+            element: <CompletedTasks />,
+          },
+          {
+            path: "pending",
+            element: <PendingTasks />,
+          },
+        ],
+      },
+
+      {
+        path: "add-task",
+        element: <TaskAdd />,
       },
       {
-        path: "task/:id",
-        element: <TaskDetail />,
-      },
-      {
-        path: "completed",
-        element: <CompletedTasks />,
-      },
-      {
-        path: "pending",
-        element: <PendingTasks />,
+        path: "search",
+        element: <TaskSearch />,
       },
     ],
   },
@@ -35,11 +53,11 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <Provider store={store}>
-      <MantineProvider>
-        <RouterProvider router={router} />
-      </MantineProvider>
-    </Provider>
+    // <Provider store={store}>
+    <MantineProvider>
+      <RouterProvider router={router} />
+    </MantineProvider>
+    // </Provider>
   );
 }
 

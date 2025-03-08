@@ -10,6 +10,7 @@ const useTaskStore = create((set) => ({
   },
   status: "loading",
   error: null,
+  sortby: "created_at",
 
   // Fetch Tasks
   fetchTasks: async () => {
@@ -58,6 +59,10 @@ const useTaskStore = create((set) => ({
           color: "red",
         },
       });
+    } finally {
+      setTimeout(() => {
+        set({ notification: { title: "", message: "", color: "" } });
+      }, 3000);
     }
   },
 
@@ -87,6 +92,10 @@ const useTaskStore = create((set) => ({
           color: "red",
         },
       });
+    } finally {
+      setTimeout(() => {
+        set({ notification: { title: "", message: "", color: "" } });
+      }, 3000);
     }
   },
 
@@ -117,6 +126,10 @@ const useTaskStore = create((set) => ({
           color: "red",
         },
       });
+    } finally {
+      setTimeout(() => {
+        set({ notification: { title: "", message: "", color: "" } });
+      }, 3000);
     }
   },
 
@@ -125,6 +138,37 @@ const useTaskStore = create((set) => ({
     set({
       notification: { title: "", message: "", color: "" },
     });
+  },
+  // Modify notify function in Zustand store
+  notify: (notification, autoDismiss = true) => {
+    set({ notification });
+    if (autoDismiss) {
+      setTimeout(() => {
+        set({ notification: { title: "", message: "", color: "" } });
+      }, 3000);
+    }
+  },
+  sortBy: (field) =>
+    set((state) => {
+      const sortedTasks = [...state.tasks].sort((a, b) => {
+        if (field === "priority") {
+          const priorityOrder = { High: 1, Medium: 2, Low: 3 };
+          return priorityOrder[a.priority] - priorityOrder[b.priority];
+        } else if (field === "title") {
+          return a.title.localeCompare(b.title);
+        } else if (field === "created_at" || field === "due_date") {
+          return new Date(a[field]) - new Date(b[field]);
+        }
+        return 0;
+      });
+
+      return { tasks: sortedTasks };
+    }),
+  proccessing: () => {
+    set({ status: "loading" });
+  },
+  finished: () => {
+    set({ status: "succeeded" });
   },
 }));
 

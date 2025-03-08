@@ -1,8 +1,17 @@
-import { Alert, Container, Button, Notification, Stack } from "@mantine/core";
+import {
+  Alert,
+  Container,
+  Group,
+  Box,
+  Button,
+  Notification,
+  Stack,
+} from "@mantine/core";
 import React, { useState } from "react";
 import TaskCard from "../components/TaskCard";
 import { useSelector } from "react-redux";
 import useTaskStore from "../store/useTaskStore";
+import { Link } from "react-router-dom";
 function PendingTasks() {
   // const dispatch =useDispatch();
   // const { notification, status } = useSelector((state) => state.todos);
@@ -13,17 +22,18 @@ function PendingTasks() {
   const { tasks, status, notification, cancelNotification } = useTaskStore();
   const pendingTasks = tasks.filter((task) => task.completed === false);
   return (
-    <Container>
-      {notification.message && (
-        <Notification
-          color={notification.color}
-          title={notification.title}
-          onClose={cancelNotification}
-          // onClose={()=>dispatchEvent(cancelNotification())}
-        >
-          {notification.message}
-        </Notification>
-      )}
+    <div style={{ padding: "10px" }}>
+      <Group style={{ width: "100%" }}>
+        {notification.message && (
+          <Notification
+            onClose={cancelNotification}
+            color={notification.color}
+            title={notification.title}
+          >
+            {notification.message}
+          </Notification>
+        )}
+      </Group>
       <Stack spacing="xs" style={{ gap: "4px" }}>
         {status === "loading" ? (
           <Button
@@ -52,7 +62,7 @@ function PendingTasks() {
           pendingTasks.map((task) => <TaskCard key={task.id} task={task} />)
         )}
       </Stack>
-    </Container>
+    </div>
   );
 }
 

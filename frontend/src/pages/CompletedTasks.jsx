@@ -13,7 +13,7 @@ function CompletedTasks() {
   //   (task) => task.completed === true
   // );
   return (
-    <Container>
+    <div style={{ padding: "10px" }}>
       {notification.message && (
         <Notification
           color={notification.color}
@@ -52,7 +52,7 @@ function CompletedTasks() {
           completedTasks.map((task) => <TaskCard key={task.id} task={task} />)
         )}
       </Stack>
-    </Container>
+    </div>
   );
 }
 

@@ -1,54 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Button,
   Stack,
-  Text,
+  Group,
   Container,
-  TextInput,
+  Box,
   Notification,
   Alert,
 } from "@mantine/core";
-import { useDispatch, useSelector } from "react-redux";
-// import { addTask, cancelNotification } from "../features/tasks/taskSlice";
+import { Link } from "react-router-dom";
 import TaskCard from "../components/TaskCard";
 import useTaskStore from "../store/useTaskStore";
+import TaskToolbar from "../components/TaskToolbar";
 
 function TaskList() {
-  const { tasks, status, notification, addTask, cancelNotification } =
-    useTaskStore();
+  const { tasks, status, notification, cancelNotification } = useTaskStore();
   // const dispatch = useDispatch();
   // const { tasks, notification, status } = useSelector((state) => state.todos);
-  const [newTaskTitle, setNewTaskTitle] = useState("");
-  const [newTaskDescription, setNewTaskDescription] = useState("");
-
-  function reset() {
-    setNewTaskDescription("");
-    setNewTaskTitle("");
-  }
-  function handleAddTask() {
-    if (newTaskDescription && newTaskTitle) {
-      const newTaskObj = {
-        description: newTaskDescription,
-        title: newTaskTitle,
-        completed: false,
-      };
-      // dispatch(addTask(newTaskObj));
-      addTask(newTaskObj);
-      reset();
-      setTimeout(() => {
-        // dispatch(cancelNotification());
-        cancelNotification();
-      }, 3000);
-    }
-  }
   console.log(tasks);
 
   return (
-    <Container>
-      <Stack spacing="lg" mt="lg">
+    <div style={{ padding: "10px" }}>
+      <Stack spacing="lg">
         {notification.message && (
           <Notification
-            // onClose={() => dispatch(cancelNotification())}
             onClose={cancelNotification}
             color={notification.color}
             title={notification.title}
@@ -56,25 +31,6 @@ function TaskList() {
             {notification.message}
           </Notification>
         )}
-
-        <TextInput
-          placeholder="Enter your task title"
-          value={newTaskTitle}
-          onChange={(e) => setNewTaskTitle(e.target.value)}
-          label="Task title"
-          required
-          mb="10px"
-        />
-        <TextInput
-          placeholder="Enter your task description"
-          value={newTaskDescription}
-          onChange={(e) => setNewTaskDescription(e.target.value)}
-          label="Task description"
-          required
-        />
-        <Button onClick={handleAddTask} my="10px">
-          Add Task
-        </Button>
         <Stack spacing="xs" style={{ gap: "4px" }}>
           {status === "loading" ? (
             <Button
@@ -102,7 +58,7 @@ function TaskList() {
           )}
         </Stack>
       </Stack>
-    </Container>
+    </div>
   );
 }
 

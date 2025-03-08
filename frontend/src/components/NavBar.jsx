@@ -9,7 +9,13 @@ function NavBar() {
   const isMobile = useMediaQuery("(max-width: 360px)");
 
   return (
-    <Container p="10px" style={{ backgroundColor: "#f5f5f5", width: "100vw" }}>
+    <div
+      style={{
+        backgroundColor: "#f5f5f5",
+        margin: 0,
+        padding: "10px",
+      }}
+    >
       <Group position="apart">
         <Text size="xl" weight={700}>
           To Do List
@@ -66,7 +72,7 @@ function NavBar() {
           </Link>
         </Group>
       )}
-    </Container>
+    </div>
   );
 }
 

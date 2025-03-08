@@ -15,6 +15,8 @@ function TaskCard({ task }) {
   const { toggleTaskCompletion, deleteTask, cancelNotification } =
     useTaskStore();
   const handleDeleteTask = (id) => {
+    console.log(id);
+
     // dispatch(deleteTask(id));
     deleteTask(id);
     setTimeout(() => {
@@ -33,7 +35,7 @@ function TaskCard({ task }) {
   };
 
   return (
-    <Card key={task.id} shadow="sm" p="md" mt="md">
+    <Card key={task.id} shadow="sm" px="md">
       <Group position="apart">
         <Checkbox
           label={task.title}
