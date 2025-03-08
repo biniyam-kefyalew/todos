@@ -88,6 +88,9 @@ The frontend will be available at `http://localhost:5173/`.
 - `/` - Displays all tasks (both completed and pending).
 - `/pending` - Displays only tasks that are still pending.
 - `/completed` - Displays only tasks that have been completed.
+- `/search` - Search tasks using title.
+- `/task:taskId` - Displays task detail.
+- `/add` - Add new task.
 
 ### Task Features
 
