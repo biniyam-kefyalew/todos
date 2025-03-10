@@ -1,64 +1,68 @@
-# To-Do List App (v0.1.0)
+# To-Do List App
 
-A simple To-Do List application built with React, Mantine UI library, Zustand for state management (with an option to use Redux instead), and Django as the backend API. This app allows users to manage tasks with features such as priority levels, due dates, categories, search functionality, and sorting.
+A feature-rich To-Do List application built with **React (Frontend)** and **Django (Backend)**. This app enables users to manage tasks efficiently with features like authentication, drag-and-drop, notifications, dark mode, and recurring tasks.
 
-## Features (v0.1.0)
+---
 
-- **List of Tasks**: Displays all tasks.
-- **Pending Tasks**: View tasks that are not yet completed.
-- **Completed Tasks**: View tasks that have been completed.
-- **Add Tasks**: Add new tasks to the list.
-- **Task Completion**: Toggle task completion status.
-- **Delete Tasks**: Remove tasks from the list.
-- **Priority Levels**: Set task priority levels (Low, Medium, High).
-- **Due Dates**: Set and view due dates for tasks.
-- **Task Categories**: Categorize tasks (Work, Personal, Shopping, etc.).
-- **Search Functionality**: Search for tasks by name or description.
-- **Task Sorting**: Sort tasks by priority or due date.
-- **Responsive UI**: Built with Mantine UI library for a clean, responsive interface.
+## Features (v1.2.1)
+
+### Frontend
+
+- **User Authentication**: Register and log in to manage tasks.
+- **Task Management**: Add, edit, complete, and delete tasks.
+- **Task Prioritization**: Assign priority levels (Low, Medium, High).
+- **Due Dates & Categories**: Set and view deadlines & categorize tasks.
+- **Search & Sort**: Find tasks easily by name, priority, or due date.
+- **Drag and Drop**: Reorder tasks with a simple interface.
+- **Notifications**: Get reminders for due or upcoming tasks.
+- **Dark Mode**: Switch between light and dark themes.
+- **Recurring Tasks**: Set tasks to repeat daily, weekly, etc.
+- **Responsive UI**: Built with **Mantine UI** for a modern look.
+
+### Backend
+
+- **User Authentication**: Secure login & registration using Django.
+- **Task Management API**: CRUD operations for managing tasks.
+- **Priority & Due Date Management**: Store and fetch task details.
+- **Category & Sorting API**: Filter tasks based on priority, due dates, etc.
+- **Recurring Task Support**: Handle repeated task schedules.
+- **RESTful API**: Built with Django REST Framework (DRF).
+
+---
 
 ## Project Structure
 
-```bash
+```
 ├── todos/
-│   ├── frontend/          # Frontend folder for React
-│   │   ├── node_modules/  # Dependencies for the project
-│   │   ├── public/        # Public assets (favicon, index.html, etc.)
+│   ├── frontend/          # React Frontend
 │   │   ├── src/
-│   │   │   ├── assets/    # Static assets like images, fonts, etc.
-│   │   │   ├── components/ # Reusable React components
-│   │   │   │   ├── NavBar.jsx
-│   │   │   │   ├── TaskCard.jsx
-│   │   │   ├── features/  # Feature-specific logic
-│   │   │   │   ├── taskSlice.js
-│   │   │   │   ├── taskSlice.test.js
-│   │   │   ├── layout/    # Layout-related components
-│   │   │   │   ├── Layout.jsx
-│   │   │   ├── pages/     # Application pages
-│   │   │   │   ├── Completed.jsx
-│   │   │   │   ├── Pending.jsx
-│   │   │   │   ├── TaskDetails.jsx
-│   │   │   │   ├── TaskList.jsx
-│   │   │   ├── store/     # State management
-│   │   │   │   ├── store.jsx
-│   │   │   │   ├── useTaskStore.js
-│   │   │   ├── utils/     # Utility functions
-│   │   ├── App copy.jsx   # A backup or experimental App component
-│   │   ├── App.jsx        # Main application component
-│   │   ├── main.jsx       # Entry point for rendering the app
-│   │   ├── index.css      # Global CSS styles
-│   │   ├── index.html     # HTML template in public/
-│   │   ├── .gitignore     # Git ignored files
-│   │   ├── eslint.config.js # ESLint configuration
-│   │   ├── package-lock.json  # Dependency lock file
-│   │   ├── package.json   # Project dependencies and scripts
-│   │   ├── README.md      # Frontend documentation
-│   │   ├── vite.config.js # Vite configuration
+│   │   │   ├── components/
+│   │   │   ├── features/
+│   │   │   ├── layout/
+│   │   │   ├── pages/
+│   │   │   ├── store/
+│   │   │   ├── utils/
+│   │   │   ├── App.jsx
+│   │   │   ├── main.jsx
+│   │   ├── package.json
+│   │   ├── vite.config.js
+│   ├── backend/          # Django Backend
+│   │   ├── api/
+│   │   │   ├── models.py
+│   │   │   ├── views.py
+│   │   │   ├── serializers.py
+│   │   │   ├── urls.py
+│   │   ├── todos/
+│   │   │   ├── settings.py
+│   │   │   ├── urls.py
+│   │   ├── manage.py
 ```
 
-## Installation
+---
 
-### Frontend Setup (React)
+## Installation & Setup
+
+### Frontend (React)
 
 1. Navigate to the frontend directory:
 
@@ -66,74 +70,140 @@ A simple To-Do List application built with React, Mantine UI library, Zustand fo
 cd todos/frontend
 ```
 
-2. Install the required Node.js dependencies:
+2. Install dependencies:
 
 ```bash
-npm install zustand react-router-dom @mantine/core @mantine/hooks @mantine/dates dayjs
- react-icons
+npm install zustand react-router-dom @mantine/core @mantine/hooks @mantine/dates dayjs react-icons react-dnd react-toastify react-calendar
 ```
 
-3. Start the React development server:
+3. Start the development server:
 
 ```bash
 npm run dev
 ```
 
-The frontend will be available at `http://localhost:5173/`.
+The frontend runs at `http://localhost:5173/`.
 
-## Usage
+### Backend (Django)
 
-### Routes
+1. Navigate to the backend directory:
 
-- `/` - Displays all tasks (both completed and pending).
-- `/pending` - Displays only tasks that are still pending.
-- `/completed` - Displays only tasks that have been completed.
-- `/search` - Search tasks using title.
-- `/task:taskId` - Displays task detail.
-- `/add` - Add new task.
+```bash
+cd todos/backend
+```
 
-### Task Features
+2. Create a virtual environment:
 
-- **Task Prioritization**: Users can assign a priority level to tasks (Low, Medium, High).
-- **Due Dates**: Tasks can have a due date, and users can view them.
-- **Task Categories**: Categorize tasks as Work, Personal, Shopping, or any custom category.
-- **Search Functionality**: Easily search for tasks by name or description.
-- **Task Sorting**: Sort tasks by priority or due date to organize them better.
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
 
-### State Management
+3. Install dependencies:
 
-- The app uses **Zustand** for state management by default. However, if you prefer to use **Redux** for state management, you can easily replace Zustand by integrating Redux with the `taskSlice.js` file for managing tasks globally. The project structure is designed to allow for easy switching between the two state management solutions.
+```bash
+pip install django djangorestframework django-cors-headers djangorestframework-simplejwt
+```
 
-### Task Operations
+4. Apply database migrations:
 
-- **Add Task**: A new task can be added through the input form.
-- **Toggle Task Completion**: Click on a task to toggle its completion status.
-- **Delete Task**: Tasks can be deleted from the list by clicking the delete button.
-- **Search Tasks**: Use the search bar to filter tasks by name or description.
-- **Sort Tasks**: Sort tasks by priority (Low, Medium, High) or by due date.
+```bash
+python manage.py migrate
+```
 
-## Tech Stack
+5. Create a superuser:
 
-- **Frontend**:
-  - React
-  - Mantine UI Library (for styling and components)
-  - Zustand (state management, but Redux can be used if preferred)
-  - React Router (for routing)
+```bash
+python manage.py createsuperuser
+```
 
-## Development
+6. Start the Django server:
 
-1. Make sure both the frontend and backend servers are running.
-2. The frontend communicates with the backend API to fetch, add, delete, and toggle tasks.
-3. The app uses Zustand for global state management and React Router for navigation between different views (All Tasks, Pending, and Completed). If you prefer Redux, you can integrate it by replacing the Zustand store in the `store/` directory.
+```bash
+python manage.py runserver
+```
+
+The backend runs at `http://localhost:8000/`.
+
+---
+
+## API Endpoints (Backend)
+
+### Authentication
+
+- `POST /api/auth/register/` – Register new users.
+- `POST /api/auth/login/` – Login and receive a token.
+- `POST /api/auth/logout/` – Logout the user.
+
+### Task Management
+
+- `GET /api/tasks/` – Fetch all tasks.
+- `POST /api/tasks/` – Create a new task.
+- `GET /api/tasks/<task_id>/` – Retrieve a task.
+- `PUT /api/tasks/<task_id>/` – Update a task.
+- `DELETE /api/tasks/<task_id>/` – Delete a task.
+
+### Task Filters
+
+- `GET /api/tasks/?status=pending` – Fetch pending tasks.
+- `GET /api/tasks/?status=completed` – Fetch completed tasks.
+- `GET /api/tasks/?priority=high` – Fetch high-priority tasks.
+- `GET /api/tasks/?due_today=true` – Fetch tasks due today.
+
+---
+
+## Routes (Frontend)
+
+- `/` - View all tasks.
+- `/pending` - View pending tasks.
+- `/completed` - View completed tasks.
+- `/add` - Add a new task.
+- `/task/:taskId` - View task details.
+- `/login` - User login.
+- `/register` - User registration.
+
+---
+
+## State Management (Frontend)
+
+- **Uses Zustand** for state management.
+- Optionally, can be switched to **Redux** by modifying `taskSlice.js`.
+
+---
+
+## Development Notes
+
+1. Ensure both frontend and backend servers are running.
+2. The frontend communicates with the backend API for authentication and task management.
+3. Uses **Zustand** for global state management and **React Router** for navigation.
+
+---
 
 ## Contributing
 
 1. Fork the repository.
-2. Create a new branch for your feature or bugfix (`git checkout -b feature-name`).
-3. Commit your changes (`git commit -am 'Add feature'`).
-4. Push to your branch (`git push origin feature-name`).
-5. Create a new Pull Request.
+2. Create a new branch:
+
+```bash
+git checkout -b feature-name
+```
+
+3. Commit changes:
+
+```bash
+git commit -am 'Add feature'
+```
+
+4. Push changes:
+
+```bash
+git push origin feature-name
+```
+
+5. Submit a Pull Request.
+
+---
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.

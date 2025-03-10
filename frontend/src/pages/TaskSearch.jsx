@@ -29,7 +29,7 @@ function TaskSearch() {
   }, [searchQuery, tasks]);
 
   return (
-    <Container p="10px" w={"100%"}>
+    <Container fluid style={{ marginInline: 0 }} p="10px">
       <Group position="apart" style={{ gap: "8px", alignItems: "center" }}>
         <Box style={{ flex: 1 }}>
           <TextInput

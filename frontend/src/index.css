@@ -1,4 +1,20 @@
-.mantine-Calendar-calendarHeaderControlIcon {
-  width: 16px !important;
-  height: 16px !important;
+.custom-calendar {
+  width: 100% !important;
+  border: none !important;
+  background-color: #a5d8ff !important;
+  padding: 4cqb 2px;
+}
+.no-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer/Edge */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+.mantine-Drawer-header {
+  background: #90caf9 !important;
+}
+.mantine-Drawer-content {
+  height: fit-content !important;
 }

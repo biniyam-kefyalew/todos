@@ -10,16 +10,16 @@ function TaskToolbar() {
   return (
     <Box
       p="10px"
+      ml={"auto"}
       style={{
         display: "flex",
         gap: "15px",
-        width: "100%",
         justifyContent: "space-between",
         alignItems: "center",
       }}
     >
       {/* Search Button */}
-      <Link to="/search">
+      <Link to="/app/search">
         <Button
           variant="light"
           leftSection={<FiSearch size={16} />}
@@ -49,7 +49,7 @@ function TaskToolbar() {
       />
 
       {/* Add Task Button */}
-      <Link to="/add-task">
+      <Link to="/app/add-task">
         <Button variant="light" size="md" style={{ minWidth: "120px" }}>
           Add Task
         </Button>

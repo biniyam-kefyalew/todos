@@ -1,64 +1,70 @@
-import { Button, Card, Checkbox, Group, Text } from "@mantine/core";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { Card, Checkbox, Button, Group, Text } from "@mantine/core";
 import { Link } from "react-router-dom";
-import {
-  cancelNotification,
-  deleteTask,
-  toggleTaskCompletion,
-} from "../features/tasks/taskSlice";
-import { useMediaQuery } from "@mantine/hooks";
+import { FiAlertCircle } from "react-icons/fi";
+import dayjs from "dayjs";
 import useTaskStore from "../store/useTaskStore";
 
 function TaskCard({ task }) {
-  // const dispatch = useDispatch();
   const { toggleTaskCompletion, deleteTask, cancelNotification } =
     useTaskStore();
-  const handleDeleteTask = (id) => {
-    console.log(id);
 
-    // dispatch(deleteTask(id));
+  const handleDeleteTask = (id) => {
     deleteTask(id);
     setTimeout(() => {
-      // dispatch(cancelNotification());
       cancelNotification();
     }, 3000);
   };
 
   const toggleTaskCompletionHandler = (id) => {
-    // dispatch(toggleTaskCompletion(id));
     toggleTaskCompletion(id);
     setTimeout(() => {
-      // dispatch(cancelNotification());
       cancelNotification();
     }, 3000);
   };
 
   return (
-    <Card key={task.id} shadow="sm" px="md">
-      <Group position="apart">
+    <Group
+      position="apart"
+      p={"10px 6px"}
+      my={"4px"}
+      style={{ borderRadius: "5px" }}
+    >
+      {!dayjs(task.due_date).isBefore(dayjs(), "day") && (
         <Checkbox
-          label={task.title}
           checked={task.completed}
           onChange={() => toggleTaskCompletionHandler(task.id)}
         />
-        <Group style={{ marginLeft: "auto" }}>
-          <Link to={`/task/${task.id}`}>
-            <Button variant="light" color="blue" size="xs">
-              View
+      )}
+      {dayjs(task.due_date).isBefore(dayjs(), "day") && !task.completed && (
+        <FiAlertCircle color="red" size={20} />
+      )}
+      <Text ml={"16px"} style={{ textTransform: "capitalize" }}>
+        {task.title}
+      </Text>
+      <Group style={{ marginLeft: "auto", gap: "16px" }}>
+        {!dayjs(task.due_date).isBefore(dayjs(), "day") && (
+          <Link to={`/app/task/${task.id}`}>
+            <Button variant="light" color="green" size="xs">
+              Edit
             </Button>
           </Link>
-          <Button
-            variant="light"
-            color="red"
-            size="xs"
-            onClick={() => handleDeleteTask(task.id)}
-          >
-            Delete
+        )}
+        <Link to={`/app/task/${task.id}`}>
+          <Button variant="light" color="blue" size="xs">
+            View
           </Button>
-        </Group>
+        </Link>
+        <Button
+          variant="light"
+          color="red"
+          size="xs"
+          onClick={() => handleDeleteTask(task.id)}
+        >
+          Delete
+        </Button>
       </Group>
-    </Card>
+    </Group>
   );
 }
 
